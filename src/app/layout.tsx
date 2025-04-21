@@ -1,6 +1,6 @@
 import type React from "react"
-import { Navbar } from "@/components/Navbar"
-import { Footer } from '@/components/Footer';
+import { Navbar } from "@/components/navbar"
+import { Footer } from '@/components/footer';
 // import { ThemeProvider } from "@/components/theme-provider"
 import "./globals.css"
 import type { Metadata } from "next"
