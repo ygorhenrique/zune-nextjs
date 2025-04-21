@@ -36,7 +36,7 @@ export default function StocksPage() {
 function EmptyState() {
   return (
     <div className="flex flex-col items-center justify-center rounded-lg border border-dashed p-8 text-center mt-6">
-      <h3 className="mb-2 text-lg font-medium">You haven't invested in any stocks yet</h3>
+      <h3 className="mb-2 text-lg font-medium">You haven&apos;t invested in any stocks yet</h3>
       <p className="mb-6 text-sm text-muted-foreground">Start investing now to track your stock portfolio!</p>
       <a
         href="#add-stock-modal"

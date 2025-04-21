@@ -35,7 +35,7 @@ export default function DividendsPage() {
 function EmptyState() {
   return (
     <div className="flex flex-col items-center justify-center rounded-lg border border-dashed p-8 text-center mt-6">
-      <h3 className="mb-2 text-lg font-medium">You haven't received any dividends yet</h3>
+      <h3 className="mb-2 text-lg font-medium">You haven&apos;t received any dividends yet</h3>
       <p className="mb-6 text-sm text-muted-foreground">Invest in dividend-paying assets to get started!</p>
       <a
         href="/dashboard/stocks"
