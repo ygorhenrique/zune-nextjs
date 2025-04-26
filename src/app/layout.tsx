@@ -1,5 +1,5 @@
 import type React from "react"
-import { Navbar } from "@/components/navbar"
+import { Navbar } from "@/components/Navbar"
 // import { Footer } from '@/components/footer';
 // import { ThemeProvider } from "@/components/theme-provider"
 import "./globals.css"

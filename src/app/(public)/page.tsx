@@ -4,7 +4,7 @@ import { TestimonialsSection } from "@/components/testimonials-section"
 import { BlogSection } from "@/components/blog-section"
 import { FAQSection } from "@/components/faq-section"
 import { CTASection } from "@/components/cta-section"
-import { Footer } from "@/components/footer"
+import { Footer } from "@/components/Footer"
 
 export default function Home() {
   return (
