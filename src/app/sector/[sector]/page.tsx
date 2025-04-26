@@ -8,13 +8,13 @@ import { SectorTrends } from "@/components/sector/sector-trends"
 import { getSectorData } from "@/lib/mock-sector-data"
 
 interface SectorPageProps {
-  params: {
-    sector: string
-  }
+  params: Promise<{
+    sector: string;
+  }>;
 }
 
 export async function generateMetadata({ params }: SectorPageProps): Promise<Metadata> {
-  const { sector } = params
+  const { sector } = await params
   const sectorData = getSectorData(sector)
 
   if (!sectorData) {
@@ -41,8 +41,8 @@ export async function generateMetadata({ params }: SectorPageProps): Promise<Met
   }
 }
 
-export default function SectorPage({ params }: SectorPageProps) {
-  const { sector } = params
+export default async function SectorPage({ params }: SectorPageProps) {
+  const { sector } = await params
   const sectorData = getSectorData(sector)
 
   if (!sectorData) {
