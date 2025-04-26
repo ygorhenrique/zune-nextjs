@@ -1,19 +1,27 @@
 import Link from "next/link"
 import { Instagram, Twitter } from "lucide-react"
+import { getAllSectors, getPopularStocks } from "@/lib/mock-sector-data"
 
 export function Footer() {
+  // Get sectors and popular stocks data
+  const sectors = getAllSectors()
+  const popularStocks = getPopularStocks()
+
   return (
-    <footer className="bg-gray-800 text-white py-8">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <footer className="bg-gray-800 py-8 text-white">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-5">
+          {/* ZuneMoney Branding */}
           <div>
             <h3 className="text-lg font-bold">ZuneMoney</h3>
             <p className="text-sm">The easy way to visualize your money.</p>
-            <p className="text-sm mt-2">© {new Date().getFullYear()} ZuneMoney. All rights reserved.</p>
+            <p className="mt-2 text-sm">© {new Date().getFullYear()} ZuneMoney. All rights reserved.</p>
           </div>
+
+          {/* Links */}
           <div>
             <h3 className="text-lg font-bold">Links</h3>
-            <ul className="text-sm space-y-2">
+            <ul className="space-y-2 text-sm">
               <li>
                 <Link href="https://blog.zune.money/" className="hover:underline">
                   Blog
@@ -31,9 +39,39 @@ export function Footer() {
               </li>
             </ul>
           </div>
+
+          {/* Explore Sectors (New) */}
+          <div>
+            <h3 className="text-lg font-bold">Explore Sectors</h3>
+            <ul className="space-y-2 text-sm">
+              {sectors.map((sector) => (
+                <li key={sector.id}>
+                  <Link href={`/sector/${sector.id}`} className="text-gray-400 hover:text-white hover:underline">
+                    {sector.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Popular Stocks (New) */}
+          <div>
+            <h3 className="text-lg font-bold">Popular Stocks</h3>
+            <ul className="space-y-2 text-sm">
+              {popularStocks.map((stock) => (
+                <li key={stock.ticker}>
+                  <Link href={`/stock/${stock.ticker}`} className="text-gray-400 hover:text-white hover:underline">
+                    {stock.companyName} ({stock.ticker})
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Follow Us */}
           <div>
             <h3 className="text-lg font-bold text-white">Follow Us</h3>
-            <div className="flex space-x-4 mt-2">
+            <div className="mt-2 flex space-x-4">
               <Link
                 href="https://www.instagram.com/zune.money"
                 className="text-gray-400 hover:text-white"

@@ -1,7 +1,8 @@
 import type React from "react"
 import { Navbar } from "@/components/Navbar"
-// import { Footer } from '@/components/footer';
+import { Footer } from '@/components/Footer';
 // import { ThemeProvider } from "@/components/theme-provider"
+import { Toaster } from "@/components/ui/toaster"
 import "./globals.css"
 import type { Metadata } from "next"
 
@@ -64,10 +65,12 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaOrg) }}
         />
       </head>
-      <body className="font-sans antialiased">
+      <body className="font-sans antialiased min-h-screen flex flex-col">
         {/* <ThemeProvider attribute="class" defaultTheme="light"> */}
           <Navbar />
-          {children}
+          <main className="flex-grow">{children}</main>
+          <Footer />
+          <Toaster />
         {/* </ThemeProvider> */}
       </body>
     </html>
