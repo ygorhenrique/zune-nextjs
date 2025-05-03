@@ -184,3 +184,37 @@
   background-size: 200% 100%;
   animation: gradient-x 10s ease infinite;
 }
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-fade-in-delayed {
+  animation: fade-in 0.6s ease-out 0.3s forwards;
+}
+
+.welcome-message {
+  animation-delay: 0.1s;
+}
+
+.login-form-container {
+  animation-delay: 0.3s;
+}
+
+.hero-section {
+  min-height: 600px;
+}
+
+@media (max-width: 1024px) {
+  .hero-section {
+    min-height: auto;
+  }
+}
