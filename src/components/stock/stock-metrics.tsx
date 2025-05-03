@@ -7,7 +7,7 @@ interface StockMetricsProps {
   changePercent: number
   currency: string
   peRatio: number
-  dividendYield: number
+  dividendYield: number | undefined
   marketCap: number
   volume: number
   avgVolume: number
@@ -68,7 +68,7 @@ export function StockMetrics({
           </div>
           <div className="space-y-1">
             <p className="text-sm text-gray-500">Dividend Yield</p>
-            <p className="text-lg font-semibold">{dividendYield.toFixed(2)}%</p>
+            <p className="text-lg font-semibold">{dividendYield && (dividendYield * 100).toFixed(2)}%</p>
           </div>
           <div className="space-y-1">
             <p className="text-sm text-gray-500">Market Cap</p>

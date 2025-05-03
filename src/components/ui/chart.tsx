@@ -112,10 +112,11 @@ export function ChartArea({ className, ...props }: ChartAreaProps) {
           dataKey={category}
           fill={`hsl(var(--chart-${index}))`}
           stroke={`hsl(var(--chart-${index}))`}
-          {...props}
+          // {...props}
         />
       ))}
-      {!categories && <Area dataKey={yField} fill="hsl(var(--chart-0))" stroke="hsl(var(--chart-0))" {...props} />}
+      {/* {!categories && <Area dataKey={yField} fill="hsl(var(--chart-0))" stroke="hsl(var(--chart-0))" {...props} />} */}
+      {!categories && <Area dataKey={yField} fill="hsl(var(--chart-0))" stroke="hsl(var(--chart-0))" />}
     </>
   )
 }
@@ -128,9 +129,11 @@ export function ChartLine({ className, ...props }: ChartLineProps) {
   return (
     <>
       {categories?.map((category, index) => (
-        <Line key={index} dataKey={category} stroke={`hsl(var(--chart-${index}))`} {...props} />
+        // <Line key={index} dataKey={category} stroke={`hsl(var(--chart-${index}))`} {...props} />
+        <Line key={index} dataKey={category} stroke={`hsl(var(--chart-${index}))`} />
       ))}
-      {!categories && <Line dataKey={yField} stroke="hsl(var(--chart-0))" {...props} />}
+      {/* {!categories && <Line dataKey={yField} stroke="hsl(var(--chart-0))" {...props} />} */}
+      {!categories && <Line dataKey={yField} stroke="hsl(var(--chart-0))" />}
     </>
   )
 }
@@ -143,9 +146,11 @@ export function ChartBar({ className, ...props }: ChartBarProps) {
   return (
     <>
       {categories?.map((category, index) => (
-        <Bar key={index} dataKey={category} fill={`hsl(var(--chart-${index}))`} {...props} />
+        // <Bar key={index} dataKey={category} fill={`hsl(var(--chart-${index}))`} {...props} />
+        <Bar key={index} dataKey={category} fill={`hsl(var(--chart-${index}))`} />
       ))}
-      {!categories && <Bar dataKey={yField} fill="hsl(var(--chart-0))" {...props} />}
+      {/* {!categories && <Bar dataKey={yField} fill="hsl(var(--chart-0))" {...props} />} */}
+      {!categories && <Bar dataKey={yField} fill="hsl(var(--chart-0))" />}
     </>
   )
 }
