@@ -10,6 +10,8 @@ import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
 import Link from "next/link"
 
+import { accountClient } from "@/lib/api/clients/accountClient";
+
 export function SignupForm() {
   const [formData, setFormData] = useState({
     email: "",
@@ -74,7 +76,16 @@ export function SignupForm() {
 
     // Simulate API call
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1500))
+      
+      const commonResponse = await accountClient.signup({
+        email: formData.email,
+        password: formData.password,
+      })
+
+      if (!commonResponse.isSuccess) {
+        setError(commonResponse.message)
+        return;
+      }
 
       // For demo purposes, simulate a successful signup
       window.location.href = "/dashboard"
