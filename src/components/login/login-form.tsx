@@ -10,6 +10,8 @@ import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Eye, EyeOff, CheckCircle, Loader2 } from "lucide-react"
 
+import { accountClient } from "@/lib/api/clients/accountClient";
+
 export function LoginForm() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -54,14 +56,19 @@ export function LoginForm() {
 
     // Simulate API call
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1500))
 
-      // For demo purposes, simulate a failed login
-      if (email === "demo@example.com" && password === "password") {
-        window.location.href = "/dashboard"
-      } else {
+      const commonResponse = await accountClient.login({
+        email: email,
+        password: password,
+      })
+
+      if (!commonResponse.isSuccess) {
         setError("Invalid email or password. Please try again.")
+        return;
       }
+
+      window.location.href = "/dashboard"
+
     } catch (err) {
       setError("An error occurred. Please try again.")
     } finally {
