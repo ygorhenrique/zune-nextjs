@@ -25,11 +25,12 @@ interface PriceHistoryChartProps {
   yearData: StockPrice[]
   fiveYearData: StockPrice[]
   currency: string
+  enabled: boolean
 }
 
 type TimeRange = "week" | "month" | "year" | "fiveYears"
 
-export function PriceHistoryChart({ weekData, monthData, yearData, fiveYearData, currency }: PriceHistoryChartProps) {
+export function PriceHistoryChart({ weekData, monthData, yearData, fiveYearData, currency, enabled }: PriceHistoryChartProps) {
   const [activeRange, setActiveRange] = useState<TimeRange>("month")
 
   const getDataForRange = (range: TimeRange) => {
@@ -148,6 +149,12 @@ export function PriceHistoryChart({ weekData, monthData, yearData, fiveYearData,
   }
 
   const timeRanges: TimeRange[] = ["week", "month", "year", "fiveYears"]
+
+  if (!enabled) {
+    return (
+      <div> </div>
+    )
+  }
 
   return (
     <Card className="shadow-md">
