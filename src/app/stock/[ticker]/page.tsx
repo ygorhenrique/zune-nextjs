@@ -283,6 +283,7 @@ export default async function StockPage({ params }: StockPageProps) {
           yearData={stock.priceHistory.year}
           fiveYearData={stock.priceHistory.fiveYears}
           currency={stock.currency}
+          enabled={false}
         />
         <CompanySummary
           logoUrl={stock.logoUrl}
