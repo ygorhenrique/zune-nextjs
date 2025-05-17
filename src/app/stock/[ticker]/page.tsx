@@ -292,7 +292,7 @@ export default async function StockPage({ params }: StockPageProps) {
           industry={stock.industry}
           employees={stock.employees}
           website={stock.website}
-          founded={stock.founded}
+          // founded={stock.founded}
           ceo={stock.ceo}
           headquarters={stock.headquarters}
         />
