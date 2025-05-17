@@ -479,3 +479,176 @@ export const getStockByTicker = (ticker: string): StockDetails | undefined => {
 export const getAllStockTickers = (): string[] => {
   return Object.keys(mockStockData)
 }
+
+// Mock stock data for the stock comparison tool
+
+interface StockData {
+  ticker: string
+  companyName: string
+  currentPrice: number
+  dividendYield: number
+  peRatio: number
+  marketCap: string
+  fiftyTwoWeekHigh: number
+  fiftyTwoWeekLow: number
+  sector: string
+  industry: string
+  description: string
+}
+
+const stockDatabase: Record<string, StockData> = {
+  AAPL: {
+    ticker: "AAPL",
+    companyName: "Apple Inc.",
+    currentPrice: 150.25,
+    dividendYield: 0.65,
+    peRatio: 25.3,
+    marketCap: "$2.5T",
+    fiftyTwoWeekHigh: 180.1,
+    fiftyTwoWeekLow: 120.5,
+    sector: "Technology",
+    industry: "Consumer Electronics",
+    description:
+      "Apple Inc. designs, manufactures, and markets smartphones, personal computers, tablets, wearables, and accessories worldwide.",
+  },
+  MSFT: {
+    ticker: "MSFT",
+    companyName: "Microsoft Corp.",
+    currentPrice: 305.75,
+    dividendYield: 0.75,
+    peRatio: 32.1,
+    marketCap: "$2.3T",
+    fiftyTwoWeekHigh: 349.67,
+    fiftyTwoWeekLow: 243.0,
+    sector: "Technology",
+    industry: "Software",
+    description:
+      "Microsoft Corporation develops, licenses, and supports software, services, devices, and solutions worldwide.",
+  },
+  KO: {
+    ticker: "KO",
+    companyName: "Coca-Cola Co.",
+    currentPrice: 62.5,
+    dividendYield: 3.1,
+    peRatio: 24.8,
+    marketCap: "$270B",
+    fiftyTwoWeekHigh: 65.0,
+    fiftyTwoWeekLow: 55.0,
+    sector: "Consumer Defensive",
+    industry: "Beverages",
+    description: "The Coca-Cola Company manufactures, markets, and sells various nonalcoholic beverages worldwide.",
+  },
+  JNJ: {
+    ticker: "JNJ",
+    companyName: "Johnson & Johnson",
+    currentPrice: 165.3,
+    dividendYield: 2.95,
+    peRatio: 22.5,
+    marketCap: "$430B",
+    fiftyTwoWeekHigh: 175.2,
+    fiftyTwoWeekLow: 155.1,
+    sector: "Healthcare",
+    industry: "Drug Manufacturers",
+    description:
+      "Johnson & Johnson researches, develops, manufactures, and sells various products in the healthcare field worldwide.",
+  },
+  PG: {
+    ticker: "PG",
+    companyName: "Procter & Gamble",
+    currentPrice: 145.8,
+    dividendYield: 2.45,
+    peRatio: 25.2,
+    marketCap: "$400B",
+    fiftyTwoWeekHigh: 152.3,
+    fiftyTwoWeekLow: 135.7,
+    sector: "Consumer Defensive",
+    industry: "Household Products",
+    description: "The Procter & Gamble Company provides branded consumer packaged goods worldwide.",
+  },
+  V: {
+    ticker: "V",
+    companyName: "Visa Inc.",
+    currentPrice: 235.4,
+    dividendYield: 0.8,
+    peRatio: 30.5,
+    marketCap: "$490B",
+    fiftyTwoWeekHigh: 250.2,
+    fiftyTwoWeekLow: 200.1,
+    sector: "Financial Services",
+    industry: "Credit Services",
+    description: "Visa Inc. operates as a payments technology company worldwide.",
+  },
+  JPM: {
+    ticker: "JPM",
+    companyName: "JPMorgan Chase & Co.",
+    currentPrice: 155.2,
+    dividendYield: 2.6,
+    peRatio: 12.3,
+    marketCap: "$460B",
+    fiftyTwoWeekHigh: 172.5,
+    fiftyTwoWeekLow: 135.8,
+    sector: "Financial Services",
+    industry: "Banks",
+    description: "JPMorgan Chase & Co. operates as a financial services company worldwide.",
+  },
+  HD: {
+    ticker: "HD",
+    companyName: "Home Depot Inc.",
+    currentPrice: 325.7,
+    dividendYield: 2.3,
+    peRatio: 21.8,
+    marketCap: "$330B",
+    fiftyTwoWeekHigh: 345.6,
+    fiftyTwoWeekLow: 280.2,
+    sector: "Consumer Cyclical",
+    industry: "Home Improvement Retail",
+    description: "The Home Depot, Inc. operates home improvement retail stores.",
+  },
+  DIS: {
+    ticker: "DIS",
+    companyName: "Walt Disney Co.",
+    currentPrice: 110.5,
+    dividendYield: 0.0,
+    peRatio: 68.2,
+    marketCap: "$200B",
+    fiftyTwoWeekHigh: 150.3,
+    fiftyTwoWeekLow: 90.4,
+    sector: "Communication Services",
+    industry: "Entertainment",
+    description: "The Walt Disney Company operates as an entertainment company worldwide.",
+  },
+  NVDA: {
+    ticker: "NVDA",
+    companyName: "NVIDIA Corp.",
+    currentPrice: 420.3,
+    dividendYield: 0.05,
+    peRatio: 65.8,
+    marketCap: "$1.05T",
+    fiftyTwoWeekHigh: 480.9,
+    fiftyTwoWeekLow: 180.7,
+    sector: "Technology",
+    industry: "Semiconductors",
+    description:
+      "NVIDIA Corporation provides graphics, and compute and networking solutions in the United States, Taiwan, China, and internationally.",
+  },
+}
+
+export function getStockData(ticker: string): StockData {
+  const stock = stockDatabase[ticker.toUpperCase()]
+  if (!stock) {
+    throw new Error(`Stock data not found for ticker: ${ticker}`)
+  }
+  return stock
+}
+
+export function getAllStocks(): StockData[] {
+  return Object.values(stockDatabase)
+}
+
+export function getStocksByIndustry(industry: string): StockData[] {
+  return Object.values(stockDatabase).filter((stock) => stock.industry === industry)
+}
+
+export function getStocksBySector(sector: string): StockData[] {
+  return Object.values(stockDatabase).filter((stock) => stock.sector === sector)
+}

@@ -10,9 +10,9 @@ export function Footer() {
   return (
     <footer className="bg-gray-800 py-8 text-white">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-5">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-6">
           {/* ZuneMoney Branding */}
-          <div>
+          <div className="md:col-span-2">
             <h3 className="text-lg font-bold">ZuneMoney</h3>
             <p className="text-sm">The easy way to visualize your money.</p>
             <p className="mt-2 text-sm">© {new Date().getFullYear()} ZuneMoney. All rights reserved.</p>
@@ -35,6 +35,33 @@ export function Footer() {
               <li>
                 <Link href="#" className="hover:underline">
                   Contact
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+	  {/* Free Tools (Updated) */}
+          <div>
+            <h3 className="text-lg font-bold">Free Tools</h3>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <Link href="/dividend-calculator" className="text-gray-400 hover:text-white hover:underline">
+                  Dividend Calculator
+                </Link>
+              </li>
+              <li>
+                <Link href="/retirement-savings-calculator" className="text-gray-400 hover:text-white hover:underline">
+                  Retirement Calculator
+                </Link>
+              </li>
+              <li>
+                <Link href="/stock-comparison-tool" className="text-gray-400 hover:text-white hover:underline">
+                  Stock Comparison Tool
+                </Link>
+              </li>
+              <li>
+                <Link href="/portfolio-growth-simulator" className="text-gray-400 hover:text-white hover:underline">
+                  Portfolio Simulator
                 </Link>
               </li>
             </ul>

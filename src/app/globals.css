@@ -150,3 +150,71 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Add fade-in animation */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out forwards;
+}
+
+/* Add gradient-x animation for the hero background */
+@keyframes gradient-x {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient-x {
+  background-size: 200% 100%;
+  animation: gradient-x 10s ease infinite;
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-fade-in-delayed {
+  animation: fade-in 0.6s ease-out 0.3s forwards;
+}
+
+.welcome-message {
+  animation-delay: 0.1s;
+}
+
+.login-form-container {
+  animation-delay: 0.3s;
+}
+
+.hero-section {
+  min-height: 600px;
+}
+
+@media (max-width: 1024px) {
+  .hero-section {
+    min-height: auto;
+  }
+}

@@ -41,9 +41,9 @@ export function Navbar() {
                   Demo
                 </Link>
                 <Button asChild className="bg-indigo-600 hover:bg-indigo-700 transition transform hover:scale-105">
-                  <Link href="https://zune.money/signup.html">Sign Up</Link>
+                  <Link href="/signup">Sign Up</Link>
                 </Button>
-                <Link href="https://zune.money/login.html" className="text-indigo-600 hover:underline">
+                <Link href="/login" className="text-indigo-600 hover:underline">
                   Log In
                 </Link>
               </>
