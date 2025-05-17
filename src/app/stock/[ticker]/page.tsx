@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
-import { getStockByTicker } from "@/lib/mock-stock-data"
+// import { getStockByTicker, StockPrice } from "@/lib/mock-stock-data"
+import { StockDetails, StockPrice } from "@/lib/mock-stock-data"
 import { stockClient } from "@/lib/api/clients/stockClient";
 import { PriceHistoryChart } from "@/components/stock/price-history-chart"
 import { CompanySummary } from "@/components/stock/company-summary"
@@ -18,10 +19,93 @@ interface StockPageProps {
   }>;
 }
 
+// Generate mock price history data
+const generatePriceHistory = (basePrice: number, days: number, volatility: number): StockPrice[] => {
+  const prices: StockPrice[] = []
+  let currentPrice = basePrice
+
+  const now = new Date()
+
+  for (let i = days; i >= 0; i--) {
+    const date = new Date(now)
+    date.setDate(date.getDate() - i)
+
+    // Random price movement with trend
+    const change = (Math.random() - 0.5) * volatility * currentPrice
+    currentPrice = Math.max(currentPrice + change, 1) // Ensure price doesn't go below 1
+
+    prices.push({
+      date: date.toISOString().split("T")[0],
+      close: Number.parseFloat(currentPrice.toFixed(2)),
+    })
+  }
+
+  return prices
+}
+
+async function getStockByTicker(ticker: string) {
+  // This function should return the stock data based on the ticker
+  // For now, we are using a mock function to simulate fetching stock data
+
+  const companyFundamentals = await stockClient.getCompanyFundamentals(ticker)
+  const companyDividends = await stockClient.getCompanyDividends(ticker)
+  const companyLegacyEntity = await stockClient.getCompany(ticker)
+  const quote = await stockClient.getCompanyQuote(ticker)
+  const sectors = await stockClient.getCompanySectors(ticker)
+
+
+  const ceo = companyFundamentals.general.officers.find((officer: any) =>
+      officer.title.toLowerCase().includes("ceo")
+    );
+
+  if (companyFundamentals) {
+    return {
+      ticker: companyFundamentals.general.code,
+      companyName: companyFundamentals.general.name,
+      exchange: companyFundamentals.general.exchange,
+      currentPrice: quote.close,
+      previousClose: quote.previousClose,
+      change: quote.change,
+      changePercent: quote.change_p,
+      currency: companyFundamentals.general.currencyCode,
+      peRatio: companyFundamentals.highlights.peRatio,
+      dividendYield: companyFundamentals.highlights.dividendYield ? companyFundamentals.highlights.dividendYield * 100 : undefined,
+      marketCap: companyFundamentals.highlights.marketCapitalization,
+      volume: quote.volume,
+      avgVolume: 400000,
+      high52Week: companyFundamentals.technicals["52WeekHigh"],
+      low52Week: companyFundamentals.technicals["52WeekLow"],
+      open: quote.open,
+      logoUrl: "/stylized-fruit-logo.png",
+      sector: companyFundamentals.general.sector,
+      industry: companyFundamentals.general.industry,
+      employees: companyFundamentals.general.fullTimeEmployees,
+      website: companyFundamentals.general.webURL,
+      description: companyFundamentals.general.description,
+      headquarters: {
+        city:companyFundamentals.general.addressData.city,
+        country: companyFundamentals.general.addressData.country == "United States" ? "USA" : companyFundamentals.general.addressData.country,
+      },
+      ipoYear: companyFundamentals.general.ipoDate? new Date(companyFundamentals.general.ipoDate). getFullYear().toString() : null,
+      // founded: 1992,
+      ceo: ceo?.name || "",
+      priceHistory: {
+        week: generatePriceHistory(175.5, 7, 0.01),
+        month: generatePriceHistory(170.25, 30, 0.015),
+        year: generatePriceHistory(155.75, 365, 0.02),
+        fiveYears: generatePriceHistory(120.5, 1825, 0.025),
+      },
+      dividendHistory: companyDividends,
+      similarCompanies: companyLegacyEntity.peers,
+      stocksBySector: sectors,
+    }
+  }
+}
+
 export async function generateMetadata({ params }: StockPageProps): Promise<Metadata> {
 
   const { ticker } = await params;
-  const stock = getStockByTicker(ticker)
+  const stock = await getStockByTicker(ticker)
 
   if (!stock) {
     return {
@@ -39,46 +123,46 @@ export async function generateMetadata({ params }: StockPageProps): Promise<Meta
 
 export default async function StockPage({ params }: StockPageProps) {
   const { ticker } = await params;
-  const stock = getStockByTicker(ticker)
+  const stock = await getStockByTicker(ticker)
 
   if (!stock) {
     notFound()
   }
 
-  // Fetch the quote price using stockClient (SSR happens here since this is a server component)
-  let companyName: string;
-  let exchange: string;
-  let currency: string;
-  let sector: string;
-  let industry: string;
-  let employees: number | null;
-  let website: string;
-  let description: string;
-  let headquarters: {
-    city: string
-    country: string
-  } | null;
-  let dividendYield: number | undefined;
+  // // Fetch the quote price using stockClient (SSR happens here since this is a server component)
+  // let companyName: string;
+  // let exchange: string;
+  // let currency: string;
+  // let sector: string;
+  // let industry: string;
+  // let employees: number | null;
+  // let website: string;
+  // let description: string;
+  // let headquarters: {
+  //   city: string
+  //   country: string
+  // } | null;
+  // let dividendYield: number | undefined;
 
   try {
-    // Fetch company info to get the current price and currency
-    const companyInfo = await stockClient.getCompanyFundamentals(ticker);
-    // currentPrice = companyInfo.currentPrice;
-    companyName = companyInfo.general.name;
-    exchange = companyInfo.general.exchange;
-    currency = companyInfo.general.currencyCode;
-    sector = companyInfo.general.sector;
-    industry = companyInfo.general.industry;
-    employees = companyInfo.general.fullTimeEmployees;
-    website = companyInfo.general.webURL;
-    description = companyInfo.general.description;
-    headquarters = { city: '', country: ''}; 
-    if (companyInfo.general.addressData) {
-      headquarters.city = companyInfo.general.addressData.city;
-      headquarters.country = companyInfo.general.addressData.country;
-    }
+    // // Fetch company info to get the current price and currency
+    // const companyInfo = await stockClient.getCompanyFundamentals(ticker);
+    // // currentPrice = companyInfo.currentPrice;
+    // companyName = companyInfo.general.name;
+    // exchange = companyInfo.general.exchange;
+    // currency = companyInfo.general.currencyCode;
+    // sector = companyInfo.general.sector;
+    // industry = companyInfo.general.industry;
+    // employees = companyInfo.general.fullTimeEmployees;
+    // website = companyInfo.general.webURL;
+    // description = companyInfo.general.description;
+    // headquarters = { city: '', country: ''}; 
+    // if (companyInfo.general.addressData) {
+    //   headquarters.city = companyInfo.general.addressData.city;
+    //   headquarters.country = companyInfo.general.addressData.country;
+    // }
 
-    dividendYield = companyInfo.highlights.dividendYield;
+    // dividendYield = companyInfo.highlights.dividendYield;
     
 
     // {
@@ -118,32 +202,32 @@ export default async function StockPage({ params }: StockPageProps) {
   } catch (error) {
     console.error(`Error fetching quote price for ${ticker}:`, error);
     // Fallback to mock data if API fails
-    companyName = stock.companyName;
-    exchange = stock.exchange;
-    currency = stock.currency;
-    sector = stock.sector;
-    industry = stock.industry;
-    employees = null;
-    website = stock.website;
-    description = stock.description;
-    headquarters = stock.headquarters;
-    dividendYield = stock.dividendYield;
+    // companyName = stock.companyName;
+    // exchange = stock.exchange;
+    // currency = stock.currency;
+    // sector = stock.sector;
+    // industry = stock.industry;
+    // employees = null;
+    // website = stock.website;
+    // description = stock.description;
+    // headquarters = stock.headquarters;
+    // dividendYield = stock.dividendYield;
   }
 
-  // Update the stock object with the fetched quote price data
-  const updatedStock = {
-    ...stock,
-    companyName,
-    exchange,
-    currency,
-    sector,
-    industry,
-    employees,
-    website,
-    description,
-    headquarters,
-    dividendYield
-  };
+  // // Update the stock object with the fetched quote price data
+  // const updatedStock = {
+  //   ...stock,
+  //   companyName,
+  //   exchange,
+  //   currency,
+  //   sector,
+  //   industry,
+  //   employees,
+  //   website,
+  //   description,
+  //   headquarters,
+  //   dividendYield
+  // };
 
   return (
     <div className="container mx-auto py-8 px-4">
@@ -153,13 +237,13 @@ export default async function StockPage({ params }: StockPageProps) {
             <div className="flex items-center gap-2">
               <h1 className="text-3xl font-bold">{stock.ticker}</h1>
               <span className="text-gray-500">|</span>
-              <h2 className="text-2xl">{updatedStock.companyName}</h2>
+              <h2 className="text-2xl">{stock.companyName}</h2>
             </div>
-            <p className="text-gray-500">{updatedStock.exchange}</p>
+            <p className="text-gray-500">{stock.exchange}</p>
           </div>
           <div className="flex flex-col items-end">
             <div className="text-3xl font-bold">
-              {updatedStock.currency} {stock.currentPrice.toFixed(2)}
+              {stock.currency} {stock.currentPrice.toFixed(2)}
             </div>
             <div className={`flex items-center ${stock.change >= 0 ? "text-green-600" : "text-red-600"}`}>
               <span>
@@ -180,9 +264,9 @@ export default async function StockPage({ params }: StockPageProps) {
           previousClose={stock.previousClose}
           change={stock.change}
           changePercent={stock.changePercent}
-          currency={updatedStock.currency}
+          currency={stock.currency}
           peRatio={stock.peRatio}
-          dividendYield={updatedStock.dividendYield}
+          dividendYield={stock.dividendYield}
           marketCap={stock.marketCap}
           volume={stock.volume}
           avgVolume={stock.avgVolume}
@@ -198,19 +282,19 @@ export default async function StockPage({ params }: StockPageProps) {
           monthData={stock.priceHistory.month}
           yearData={stock.priceHistory.year}
           fiveYearData={stock.priceHistory.fiveYears}
-          currency={updatedStock.currency}
+          currency={stock.currency}
         />
         <CompanySummary
           logoUrl={stock.logoUrl}
-          companyName={updatedStock.companyName}
-          description={updatedStock.description}
-          sector={updatedStock.sector}
-          industry={updatedStock.industry}
-          employees={updatedStock.employees}
-          website={updatedStock.website}
+          companyName={stock.companyName}
+          description={stock.description}
+          sector={stock.sector}
+          industry={stock.industry}
+          employees={stock.employees}
+          website={stock.website}
           founded={stock.founded}
           ceo={stock.ceo}
-          headquarters={updatedStock.headquarters}
+          headquarters={stock.headquarters}
         />
       </div>
 
@@ -219,7 +303,7 @@ export default async function StockPage({ params }: StockPageProps) {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-        <DividendHistoryChart dividendHistory={stock.dividendHistory} currency={updatedStock.currency} />
+        <DividendHistoryChart dividendHistory={stock.dividendHistory} currency={stock.currency} />
         <DividendTable dividendHistory={stock.dividendHistory} />
       </div>
 
@@ -246,12 +330,13 @@ export default async function StockPage({ params }: StockPageProps) {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Organization",
-            name: updatedStock.companyName,
+            name: stock.companyName,
             tickerSymbol: stock.ticker,
             industry: stock.industry,
             url: stock.website,
             description: stock.description,
-            foundingDate: stock.founded.toString(),
+            //foundingDate: stock.founded.toString(),
+            //foundingDate: stock.founded.toString(),
             numberOfEmployees: stock.employees,
             address: {
               "@type": "PostalAddress",
@@ -264,7 +349,7 @@ export default async function StockPage({ params }: StockPageProps) {
               tickerSymbol: stock.ticker,
               exchange: stock.exchange,
               price: stock.currentPrice,
-              priceCurrency: updatedStock.currency,
+              priceCurrency: stock.currency,
               dividendYield: stock.dividendYield,
             },
           }),

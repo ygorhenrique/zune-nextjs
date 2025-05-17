@@ -5,9 +5,10 @@ import type { DividendPayment } from "@/lib/mock-stock-data"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ChevronDown, ChevronUp } from "lucide-react"
+import { Dividend } from "@/lib/api/clients/types"
 
 interface DividendTableProps {
-  dividendHistory: DividendPayment[]
+  dividendHistory: Dividend[]
 }
 
 export function DividendTable({ dividendHistory }: DividendTableProps) {
@@ -25,7 +26,7 @@ export function DividendTable({ dividendHistory }: DividendTableProps) {
 
   const sortedDividends = [...dividendHistory].sort((a, b) => {
     if (sortField === "amount") {
-      return sortDirection === "asc" ? a.amount - b.amount : b.amount - a.amount
+      return sortDirection === "asc" && a.amount && b.amount ? a.amount - b.amount : (b.amount || 0) - (a.amount || 0)
     } else {
       const valueA = a[sortField]
       const valueB = b[sortField]
@@ -109,11 +110,11 @@ export function DividendTable({ dividendHistory }: DividendTableProps) {
             <TableBody>
               {sortedDividends.map((dividend, index) => (
                 <TableRow key={index}>
-                  <TableCell>{formatDate(dividend.declarationDate)}</TableCell>
-                  <TableCell>{formatDate(dividend.recordDate)}</TableCell>
+                  <TableCell>{dividend.declarationDate && formatDate(dividend.declarationDate)}</TableCell>
+                  <TableCell>{dividend.recordDate && formatDate(dividend.recordDate)}</TableCell>
                   <TableCell>{formatDate(dividend.paymentDate)}</TableCell>
                   <TableCell className="text-right">
-                    {dividend.currency} {dividend.amount.toFixed(2)}
+                    {dividend.currency} {dividend && dividend.amount && dividend.amount.toFixed(2)}
                   </TableCell>
                   <TableCell>{dividend.frequency}</TableCell>
                 </TableRow>

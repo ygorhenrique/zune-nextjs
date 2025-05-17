@@ -1,7 +1,38 @@
 // lib/api/types.ts
 
+import { SimilarCompany } from "@/lib/mock-stock-data";
+
+// CompanyLegacyEntity
+export interface CompanyLegacyEntity {
+  peers: SimilarCompany[];
+}
+
 // Last Close
 export type LastCloseResponse = number;
+
+// Quote
+export type QuoteResponse  = {
+    close: number;  
+    previousClose: number;  
+    open: number;
+    volume: number;
+    change: number;
+    change_p: number;
+}
+
+export type SectorStock = {
+    name: string;
+    ticker: string;
+    price: number;
+    change: number;
+}
+
+export type SectorStockResponse = {
+    TechnolSectorStockogy: SectorStock[];
+    Finance: SectorStock[];
+    Healthcare: SectorStock[];
+    Energy: SectorStock[];
+}
 
 // Fundamentals
 export interface CompanyFundamentals {
@@ -18,6 +49,7 @@ export interface CompanyFundamentals {
     name: string;
     exchange: string;
     currencyCode: string;
+    ipoDate: string;
     sector: string;
     industry: string;
     fullTimeEmployees: number | null;
@@ -31,9 +63,21 @@ export interface CompanyFundamentals {
       country: string;
       zip: string;
     };
+    officers: {
+      name: string;
+      title: string;
+      yearBorn: number;
+    }[];
   };
   highlights: {
+    marketCapitalization?: number;
     dividendYield?: number;
+    peRatio?: number;
+  };
+  technicals: {
+    beta?: number;
+    "52WeekHigh"?: number;
+    "52WeekLow"?: number;
   };
 }
 
@@ -42,9 +86,10 @@ export interface Dividend {
   declarationDate: string | null;
   recordDate: string | null;
   paymentDate: string;
-  value: number;
+  amount: number | null;
   currency: string;
   period: string | null;
+  frequency: string | null; // e.g., "Quarterly". This is ununsed I'm keeping it for compatibility
 }
 
 // Company Info (including Price History and Peers)

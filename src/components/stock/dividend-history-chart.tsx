@@ -11,13 +11,13 @@ import {
   type ChartOptions,
 } from "chart.js"
 import { Bar } from "react-chartjs-2"
-import type { DividendPayment } from "@/lib/mock-stock-data"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Dividend } from "@/lib/api/clients/types"
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
 interface DividendHistoryChartProps {
-  dividendHistory: DividendPayment[]
+  dividendHistory: Dividend[]
   currency: string
 }
 
@@ -26,7 +26,7 @@ export function DividendHistoryChart({ dividendHistory, currency }: DividendHist
   const groupedDividends: Record<string, number> = {}
 
   dividendHistory.forEach((dividend) => {
-    const date = new Date(dividend.paymentDate)
+    const date =  new Date(dividend.paymentDate)
     const year = date.getFullYear()
     const quarter = Math.floor(date.getMonth() / 3) + 1
     const key = `Q${quarter} ${year}`
@@ -35,7 +35,7 @@ export function DividendHistoryChart({ dividendHistory, currency }: DividendHist
       groupedDividends[key] = 0
     }
 
-    groupedDividends[key] += dividend.amount
+    groupedDividends[key] += dividend.amount || 0
   })
 
   // Sort keys by date
