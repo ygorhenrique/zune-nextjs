@@ -42,7 +42,7 @@ export function SimilarCompanies({ companies }: SimilarCompaniesProps) {
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600">Employees:</span>
-                      <span>{company.employees.toLocaleString()}</span>
+                      <span>{company.employees && company.employees.toLocaleString()}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600">Location:</span>

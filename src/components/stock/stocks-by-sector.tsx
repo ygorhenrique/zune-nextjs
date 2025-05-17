@@ -16,7 +16,7 @@ export function StocksBySector({ sectors }: StocksBySectorProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {Object.entries(sectors).map(([sector, stocks]) => (
             <div key={sector}>
-              <h3 className="font-medium text-lg mb-2">{sector}</h3>
+              <h3 className="font-medium text-lg mb-2 capitalize">{sector}</h3>
               <div className="space-y-2">
                 {stocks.slice(0, 5).map((stock) => (
                   <Link href={`/stock/${stock.ticker}`} key={stock.ticker} className="block">

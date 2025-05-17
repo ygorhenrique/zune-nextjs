@@ -28,7 +28,7 @@ export function StockFAQ({ stock }: StockFAQProps) {
     },
     {
       question: `What is ${stock.ticker}'s dividend yield?`,
-      answer: `As of today, ${stock.dividendYield}%.`,
+      answer: stock.dividendYield ? `As of today, ${stock.dividendYield && stock.dividendYield.toFixed(2)}%.` : '',
     },
     {
       question: `Where is ${stock.companyName} headquartered?`,
@@ -43,8 +43,10 @@ export function StockFAQ({ stock }: StockFAQProps) {
       answer: `${stock.ceo} is the current CEO of ${stock.companyName}.`,
     },
     {
-      question: `When was ${stock.companyName} founded?`,
-      answer: `${stock.companyName} was founded in ${stock.founded}.`,
+      // question: `When was ${stock.companyName} IP?`,
+      // answer: `${stock.companyName} was founded in ${stock.founded}.`,
+      question: `When was ${stock.companyName} IPO'd?`,
+      answer: stock.ipoYear ? `${stock.companyName}'s IPO was in ${stock.ipoYear}.` : ''
     },
   ]
 

@@ -6,13 +6,13 @@ interface StockMetricsProps {
   change: number
   changePercent: number
   currency: string
-  peRatio: number
+  peRatio: number | undefined
   dividendYield: number | undefined
-  marketCap: number
+  marketCap: number | undefined
   volume: number
   avgVolume: number
-  high52Week: number
-  low52Week: number
+  high52Week: number | undefined
+  low52Week: number | undefined
   open: number
 }
 
@@ -64,15 +64,15 @@ export function StockMetrics({
           </div>
           <div className="space-y-1">
             <p className="text-sm text-gray-500">P/E Ratio</p>
-            <p className="text-lg font-semibold">{peRatio.toFixed(2)}</p>
+            <p className="text-lg font-semibold">{peRatio && peRatio.toFixed(2)}</p>
           </div>
           <div className="space-y-1">
             <p className="text-sm text-gray-500">Dividend Yield</p>
-            <p className="text-lg font-semibold">{dividendYield && (dividendYield * 100).toFixed(2)}%</p>
+            <p className="text-lg font-semibold">{dividendYield && (dividendYield.toFixed(2) + '%')}</p>
           </div>
           <div className="space-y-1">
             <p className="text-sm text-gray-500">Market Cap</p>
-            <p className="text-lg font-semibold">{formatLargeNumber(marketCap)}</p>
+            <p className="text-lg font-semibold">{marketCap && formatLargeNumber(marketCap)}</p>
           </div>
           <div className="space-y-1">
             <p className="text-sm text-gray-500">Volume</p>
@@ -92,11 +92,11 @@ export function StockMetrics({
           </div>
           <div className="space-y-1">
             <p className="text-sm text-gray-500">52-Week High</p>
-            <p className="text-lg font-semibold">{formatCurrency(high52Week)}</p>
+            <p className="text-lg font-semibold">{high52Week && formatCurrency(high52Week)}</p>
           </div>
           <div className="space-y-1">
             <p className="text-sm text-gray-500">52-Week Low</p>
-            <p className="text-lg font-semibold">{formatCurrency(low52Week)}</p>
+            <p className="text-lg font-semibold">{low52Week && formatCurrency(low52Week)}</p>
           </div>
         </div>
       </CardContent>

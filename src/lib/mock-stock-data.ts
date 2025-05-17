@@ -1,3 +1,5 @@
+import { Dividend } from "./api/clients/types"
+
 // Mock data for stock details page
 export interface StockPrice {
   date: string
@@ -8,13 +10,14 @@ export interface DividendPayment {
   declarationDate: string
   recordDate: string
   paymentDate: string
-  amount: number
+  amount: number | null
   currency: string
   frequency: "Quarterly" | "Semi-Annual" | "Annual" | "Monthly" | "Special"
 }
 
 export interface SimilarCompany {
-  ticker: string
+  symbol: string // todo: backward compatibility the API returns symbol...
+  ticker: string // but the FE requires ticker
   companyName: string
   exchange: string
   ceo: string
@@ -58,7 +61,8 @@ export interface StockDetails {
     city: string
     country: string
   }
-  founded: number
+  ipoYear: number,
+  // founded: number
   ceo: string
   priceHistory: {
     week: StockPrice[]
@@ -66,7 +70,7 @@ export interface StockDetails {
     year: StockPrice[]
     fiveYears: StockPrice[]
   }
-  dividendHistory: DividendPayment[]
+  dividendHistory: Dividend[]
   similarCompanies: SimilarCompany[]
   stocksBySector: Record<string, SectorStock[]>
 }
@@ -140,7 +144,7 @@ export const mockStockData: Record<string, StockDetails> = {
         paymentDate: "2025-02-17",
         amount: 0.24,
         currency: "USD",
-        frequency: "Quarterly",
+        frequency: "Quarterly", period: "Quartely",
       },
       {
         declarationDate: "2024-10-30",
@@ -148,7 +152,7 @@ export const mockStockData: Record<string, StockDetails> = {
         paymentDate: "2024-11-18",
         amount: 0.24,
         currency: "USD",
-        frequency: "Quarterly",
+        frequency: "Quarterly", period: "Quartely",
       },
       {
         declarationDate: "2024-07-31",
@@ -156,7 +160,7 @@ export const mockStockData: Record<string, StockDetails> = {
         paymentDate: "2024-08-19",
         amount: 0.24,
         currency: "USD",
-        frequency: "Quarterly",
+        frequency: "Quarterly", period: "Quartely",
       },
       {
         declarationDate: "2024-05-02",
@@ -164,7 +168,7 @@ export const mockStockData: Record<string, StockDetails> = {
         paymentDate: "2024-05-20",
         amount: 0.24,
         currency: "USD",
-        frequency: "Quarterly",
+        frequency: "Quarterly", period: "Quartely",
       },
       {
         declarationDate: "2024-01-30",
@@ -172,7 +176,7 @@ export const mockStockData: Record<string, StockDetails> = {
         paymentDate: "2024-02-19",
         amount: 0.23,
         currency: "USD",
-        frequency: "Quarterly",
+        frequency: "Quarterly", period: "Quartely",
       },
       {
         declarationDate: "2023-11-02",
@@ -180,7 +184,7 @@ export const mockStockData: Record<string, StockDetails> = {
         paymentDate: "2023-11-20",
         amount: 0.23,
         currency: "USD",
-        frequency: "Quarterly",
+        frequency: "Quarterly", period: "Quartely",
       },
       {
         declarationDate: "2023-08-03",
@@ -188,7 +192,7 @@ export const mockStockData: Record<string, StockDetails> = {
         paymentDate: "2023-08-21",
         amount: 0.23,
         currency: "USD",
-        frequency: "Quarterly",
+        frequency: "Quarterly", period: "Quartely",
       },
       {
         declarationDate: "2023-05-04",
@@ -196,7 +200,7 @@ export const mockStockData: Record<string, StockDetails> = {
         paymentDate: "2023-05-22",
         amount: 0.23,
         currency: "USD",
-        frequency: "Quarterly",
+        frequency: "Quarterly", period: "Quartely",
       },
     ],
     similarCompanies: [
@@ -325,7 +329,7 @@ export const mockStockData: Record<string, StockDetails> = {
         paymentDate: "2025-04-10",
         amount: 0.68,
         currency: "USD",
-        frequency: "Quarterly",
+        frequency: "Quarterly", period: "Quartely",
       },
       {
         declarationDate: "2024-12-10",
@@ -333,7 +337,7 @@ export const mockStockData: Record<string, StockDetails> = {
         paymentDate: "2025-01-09",
         amount: 0.68,
         currency: "USD",
-        frequency: "Quarterly",
+        frequency: "Quarterly", period: "Quartely",
       },
       {
         declarationDate: "2024-09-15",
@@ -341,7 +345,7 @@ export const mockStockData: Record<string, StockDetails> = {
         paymentDate: "2024-10-14",
         amount: 0.68,
         currency: "USD",
-        frequency: "Quarterly",
+        frequency: "Quarterly", period: "Quartely",
       },
       {
         declarationDate: "2024-06-13",
@@ -349,7 +353,7 @@ export const mockStockData: Record<string, StockDetails> = {
         paymentDate: "2024-07-11",
         amount: 0.68,
         currency: "USD",
-        frequency: "Quarterly",
+        frequency: "Quarterly", period: "Quartely",
       },
       {
         declarationDate: "2024-03-14",
@@ -357,7 +361,7 @@ export const mockStockData: Record<string, StockDetails> = {
         paymentDate: "2024-04-12",
         amount: 0.62,
         currency: "USD",
-        frequency: "Quarterly",
+        frequency: "Quarterly", period: "Quartely",
       },
       {
         declarationDate: "2023-12-12",
@@ -365,7 +369,7 @@ export const mockStockData: Record<string, StockDetails> = {
         paymentDate: "2024-01-11",
         amount: 0.62,
         currency: "USD",
-        frequency: "Quarterly",
+        frequency: "Quarterly", period: "Quartely",
       },
       {
         declarationDate: "2023-09-14",
@@ -373,7 +377,7 @@ export const mockStockData: Record<string, StockDetails> = {
         paymentDate: "2023-10-12",
         amount: 0.62,
         currency: "USD",
-        frequency: "Quarterly",
+        frequency: "Quarterly", period: "Quartely",
       },
       {
         declarationDate: "2023-06-15",
@@ -381,7 +385,7 @@ export const mockStockData: Record<string, StockDetails> = {
         paymentDate: "2023-07-13",
         amount: 0.62,
         currency: "USD",
-        frequency: "Quarterly",
+        frequency: "Quarterly", period: "Quartely",
       },
     ],
     similarCompanies: [
