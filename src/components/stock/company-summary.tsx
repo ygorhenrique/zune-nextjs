@@ -13,7 +13,7 @@ interface CompanySummaryProps {
   industry: string
   employees: number | null
   website: string
-  founded: number
+  // founded: number
   ceo: string
   headquarters: {
     city: string
@@ -29,7 +29,7 @@ export function CompanySummary({
   industry,
   employees,
   website,
-  founded,
+  // founded,
   ceo,
   headquarters,
 }: CompanySummaryProps) {
@@ -84,10 +84,10 @@ export function CompanySummary({
                 <span className="font-medium text-gray-600">CEO:</span>
                 <span>{ceo}</span>
               </div>
-              <div className="flex justify-between">
+              {/* <div className="flex justify-between">
                 <span className="font-medium text-gray-600">Founded:</span>
                 <span>{founded}</span>
-              </div>
+              </div> */}
               <div className="flex justify-between">
                 <span className="font-medium text-gray-600">Employees:</span>
                 <span>{employees && employees.toLocaleString() }</span>
