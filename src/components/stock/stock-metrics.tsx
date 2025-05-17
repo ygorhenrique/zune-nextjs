@@ -78,10 +78,10 @@ export function StockMetrics({
             <p className="text-sm text-gray-500">Volume</p>
             <p className="text-lg font-semibold">{formatLargeNumber(volume)}</p>
           </div>
-          <div className="space-y-1">
+          {/* <div className="space-y-1">
             <p className="text-sm text-gray-500">Avg. Volume</p>
             <p className="text-lg font-semibold">{formatLargeNumber(avgVolume)}</p>
-          </div>
+          </div> */}
           <div className="space-y-1">
             <p className="text-sm text-gray-500">Open</p>
             <p className="text-lg font-semibold">{formatCurrency(open)}</p>
