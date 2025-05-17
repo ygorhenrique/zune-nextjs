@@ -44,24 +44,24 @@ export interface StockDetails {
   changePercent: number
   currency: string
   peRatio: number | undefined
-  dividendYield: number
-  marketCap: number
+  dividendYield: number | undefined
+  marketCap: number | undefined
   volume: number
   avgVolume: number
-  high52Week: number
-  low52Week: number
+  high52Week: number | undefined
+  low52Week: number | undefined
   open: number
   logoUrl: string
   sector: string
   industry: string
-  employees: number
+  employees: number | null
   website: string
   description: string
   headquarters: {
     city: string
     country: string
   }
-  ipoYear: number,
+  ipoYear: string | null,
   // founded: number
   ceo: string
   priceHistory: {
