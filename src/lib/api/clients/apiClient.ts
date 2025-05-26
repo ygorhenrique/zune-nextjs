@@ -5,6 +5,10 @@ export const apiClient = {
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
+
+    if (response.status === 204) {
+      return {} as T; // Return an empty object for 204 No Content
+    }
     return response.json() as Promise<T>;
   },
   async post<T, U>(url: string, data: U): Promise<T> {
