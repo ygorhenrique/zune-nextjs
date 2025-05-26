@@ -24,7 +24,7 @@ export function StockFAQ({ stock }: StockFAQProps) {
   const faqs: FAQItem[] = [
     {
       question: `What is ${stock.ticker}'s current stock price?`,
-      answer: `As of today, ${stock.currency} ${stock.currentPrice.toFixed(2)}.`,
+      answer: `As of today, ${stock.currency} ${stock.currentPrice && stock.currentPrice.toFixed(2)}.`,
     },
     {
       question: `What is ${stock.ticker}'s dividend yield?`,

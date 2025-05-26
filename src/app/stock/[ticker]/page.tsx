@@ -63,19 +63,19 @@ async function getStockByTicker(ticker: string) {
       ticker: companyFundamentals.general.code,
       companyName: companyFundamentals.general.name,
       exchange: companyFundamentals.general.exchange,
-      currentPrice: quote.close,
-      previousClose: quote.previousClose,
-      change: quote.change,
-      changePercent: quote.change_p,
+      currentPrice: quote?.close || null,
+      previousClose: quote?.previousClose  || null,
+      change: quote?.change  || null,
+      changePercent: quote?.change_p  || null,
       currency: companyFundamentals.general.currencyCode,
       peRatio: companyFundamentals.highlights.peRatio,
       dividendYield: companyFundamentals.highlights.dividendYield ? companyFundamentals.highlights.dividendYield * 100 : undefined,
       marketCap: companyFundamentals.highlights.marketCapitalization,
-      volume: quote.volume,
+      volume: quote?.volume  || null,
       avgVolume: 400000,
       high52Week: companyFundamentals.technicals["52WeekHigh"],
       low52Week: companyFundamentals.technicals["52WeekLow"],
-      open: quote.open,
+      open: quote?.open || null,
       logoUrl: "/stylized-fruit-logo.png",
       sector: companyFundamentals.general.sector,
       industry: companyFundamentals.general.industry,
@@ -243,17 +243,17 @@ export default async function StockPage({ params }: StockPageProps) {
           </div>
           <div className="flex flex-col items-end">
             <div className="text-3xl font-bold">
-              {stock.currency} {stock.currentPrice.toFixed(2)}
+              {stock.currency} {stock.currentPrice && stock.currentPrice.toFixed(2)}
             </div>
-            <div className={`flex items-center ${stock.change >= 0 ? "text-green-600" : "text-red-600"}`}>
+            <div className={`flex items-center ${stock.change  && stock.change >= 0 ? "text-green-600" : "text-red-600"}`}>
               <span>
-                {stock.change >= 0 ? "+" : ""}
-                {stock.change.toFixed(2)}
+                {stock.change && stock.change >= 0 ? "+" : ""}
+                {stock.change && stock.change.toFixed(2)}
               </span>
               <span className="mx-1">|</span>
               <span>
-                {stock.change >= 0 ? "+" : ""}
-                {stock.changePercent.toFixed(2)}%
+                {stock.change && stock.change >= 0 ? "+" : ""}
+                {stock.changePercent && stock.changePercent.toFixed(2)}%
               </span>
             </div>
           </div>

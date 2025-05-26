@@ -80,14 +80,15 @@ export const stockClient = {
   },
 
   // Legacy Company Endpoint
-  async getCompanyQuote(symbol: string): Promise<QuoteResponse> {
+  async getCompanyQuote(symbol: string): Promise<QuoteResponse | null> {
     try {
       // Financial Modeling Prep profile endpoint (requires API key in practice)
       const url = `https://api.zune.money/stock/${symbol}/quote`;
       const response = await apiClient.get<QuoteResponse>(url);
 
       if (!response) {
-        throw new Error('Invalid response format or no data available');
+        //throw new Error('Invalid response format or no data available');
+        return null
       }
       return response as QuoteResponse;
     } catch (error) {

@@ -1,19 +1,19 @@
 import { Card, CardContent } from "@/components/ui/card"
 
 interface StockMetricsProps {
-  currentPrice: number
-  previousClose: number
-  change: number
-  changePercent: number
+  currentPrice: number | null
+  previousClose: number | null
+  change: number | null
+  changePercent: number | null
   currency: string
   peRatio: number | undefined
   dividendYield: number | undefined
   marketCap: number | undefined
-  volume: number
+  volume: number | null
   avgVolume: number
   high52Week: number | undefined
   low52Week: number | undefined
-  open: number
+  open: number | null
 }
 
 export function StockMetrics({
@@ -53,13 +53,13 @@ export function StockMetrics({
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div className="space-y-1">
             <p className="text-sm text-gray-500">Current Price</p>
-            <p className="text-lg font-semibold">{formatCurrency(currentPrice)}</p>
+            <p className="text-lg font-semibold">{currentPrice && formatCurrency(currentPrice)}</p>
           </div>
           <div className="space-y-1">
             <p className="text-sm text-gray-500">Change</p>
-            <p className={`text-lg font-semibold ${change >= 0 ? "text-green-600" : "text-red-600"}`}>
-              {change >= 0 ? "+" : ""}
-              {formatCurrency(change)} ({changePercent.toFixed(2)}%)
+            <p className={`text-lg font-semibold ${change && change >= 0 ? "text-green-600" : "text-red-600"}`}>
+              {change && change >= 0 ? "+" : ""}
+              {change && formatCurrency(change)} ({changePercent && changePercent.toFixed(2)}%)
             </p>
           </div>
           <div className="space-y-1">
@@ -76,7 +76,7 @@ export function StockMetrics({
           </div>
           <div className="space-y-1">
             <p className="text-sm text-gray-500">Volume</p>
-            <p className="text-lg font-semibold">{formatLargeNumber(volume)}</p>
+            <p className="text-lg font-semibold">{volume && formatLargeNumber(volume)}</p>
           </div>
           {/* <div className="space-y-1">
             <p className="text-sm text-gray-500">Avg. Volume</p>
@@ -84,11 +84,11 @@ export function StockMetrics({
           </div> */}
           <div className="space-y-1">
             <p className="text-sm text-gray-500">Open</p>
-            <p className="text-lg font-semibold">{formatCurrency(open)}</p>
+            <p className="text-lg font-semibold">{open && formatCurrency(open)}</p>
           </div>
           <div className="space-y-1">
             <p className="text-sm text-gray-500">Previous Close</p>
-            <p className="text-lg font-semibold">{formatCurrency(previousClose)}</p>
+            <p className="text-lg font-semibold">{previousClose && formatCurrency(previousClose)}</p>
           </div>
           <div className="space-y-1">
             <p className="text-sm text-gray-500">52-Week High</p>
