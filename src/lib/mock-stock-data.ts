@@ -38,19 +38,19 @@ export interface StockDetails {
   ticker: string
   companyName: string
   exchange: string
-  currentPrice: number
-  previousClose: number
-  change: number
-  changePercent: number
+  currentPrice: number | null
+  previousClose: number | null
+  change: number | null 
+  changePercent: number | null
   currency: string
   peRatio: number | undefined
   dividendYield: number | undefined
   marketCap: number | undefined
-  volume: number
+  volume: number | null
   avgVolume: number
   high52Week: number | undefined
   low52Week: number | undefined
-  open: number
+  open: number | null
   logoUrl: string
   sector: string
   industry: string
