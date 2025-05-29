@@ -48,8 +48,8 @@ export interface StockDetails {
   marketCap: number | undefined
   volume: number | null
   avgVolume: number
-  high52Week: number | undefined
-  low52Week: number | undefined
+  high52Week: number | null
+  low52Week: number | null
   open: number | null
   logoUrl: string
   sector: string
