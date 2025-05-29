@@ -64,7 +64,7 @@ async function getStockByTicker(ticker: string) {
       companyName: companyFundamentals.general.name,
       exchange: companyFundamentals.general.exchange,
       currentPrice: quote?.close || null,
-      previousClose: quote?.previousClose  || null,
+      previousClose: quote?.previousClose  || null, // lastClose
       change: quote?.change  || null,
       changePercent: quote?.change_p  || null,
       currency: companyFundamentals.general.currencyCode,
