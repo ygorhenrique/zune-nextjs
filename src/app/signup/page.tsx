@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     title: "Sign Up | ZuneMoney - Track Your Investments",
     description:
       "Create a ZuneMoney account to start tracking your portfolio, monitoring dividends, and managing your investments.",
-    url: "https://app.zune.money/signup",
+    url: "https://zune.money/signup",
     siteName: "ZuneMoney",
     images: [
       {
-        url: "https://app.zune.money/og-image.jpg",
+        url: "https://zune.money/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "ZuneMoney - Track Your Investments",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     title: "Sign Up | ZuneMoney - Track Your Investments",
     description:
       "Create a ZuneMoney account to start tracking your portfolio, monitoring dividends, and managing your investments.",
-    images: ["https://app.zune.money/twitter-image.jpg"],
+    images: ["https://zune.money/twitter-image.jpg"],
     creator: "@zunemoney",
   },
 }

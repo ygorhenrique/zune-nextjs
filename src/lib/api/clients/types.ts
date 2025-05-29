@@ -1,12 +1,5 @@
 // lib/api/types.ts
 
-import { SimilarCompany } from "@/lib/mock-stock-data";
-
-// CompanyLegacyEntity
-export interface CompanyLegacyEntity {
-  peers: SimilarCompany[];
-}
-
 // Last Close
 export type LastCloseResponse = number;
 

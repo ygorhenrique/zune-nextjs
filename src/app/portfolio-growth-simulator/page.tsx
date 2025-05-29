@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     title: "Portfolio Growth Simulator | ZuneMoney - Plan Your Investments",
     description:
       "Simulate your portfolio growth with ZuneMoney's free tool. Estimate future value based on contributions and returns.",
-    url: "https://app.zune.money/portfolio-growth-simulator",
+    url: "https://zune.money/portfolio-growth-simulator",
     siteName: "ZuneMoney",
     images: [
       {
-        url: "https://app.zune.money/og-portfolio-simulator.png",
+        url: "https://zune.money/og-portfolio-simulator.png",
         width: 1200,
         height: 630,
         alt: "ZuneMoney Portfolio Growth Simulator",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     title: "Portfolio Growth Simulator | ZuneMoney - Plan Your Investments",
     description:
       "Simulate your portfolio growth with ZuneMoney's free tool. Estimate future value based on contributions and returns.",
-    images: ["https://app.zune.money/og-portfolio-simulator.png"],
+    images: ["https://zune.money/og-portfolio-simulator.png"],
   },
 }
 

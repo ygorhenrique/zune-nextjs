@@ -21,7 +21,7 @@ export function FeaturesSection() {
           <div className="feature-card bg-white p-6 rounded-lg shadow-md">
             <h3 className="text-xl font-semibold mb-2">Multi-Currency Support</h3>
             <p>Manage international investments seamlessly with support for multiple currencies.</p>
-            <a href="https://app.zune.money/demo" className="text-indigo-600 hover:underline">
+            <a href="https://zune.money/demo" className="text-indigo-600 hover:underline">
               Explore Demo
             </a>
           </div>

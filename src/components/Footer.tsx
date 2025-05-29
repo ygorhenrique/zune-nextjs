@@ -28,7 +28,7 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="https://app.zune.money/demo" className="hover:underline">
+                <Link href="https://zune.money/demo" className="hover:underline">
                   Demo
                 </Link>
               </li>

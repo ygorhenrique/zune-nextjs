@@ -14,11 +14,11 @@ export const metadata: Metadata = {
     title: "Dividend Calculator | ZuneMoney - Calculate Your Dividend Income",
     description:
       "Use ZuneMoney's free Dividend Calculator to estimate your dividend income from stocks. Calculate annual and quarterly dividends with real-time data.",
-    url: "https://app.zune.money/dividend-calculator",
+    url: "https://zune.money/dividend-calculator",
     type: "website",
     images: [
       {
-        url: "https://app.zune.money/og-image-dividend-calculator.png",
+        url: "https://zune.money/og-image-dividend-calculator.png",
         width: 1200,
         height: 630,
         alt: "ZuneMoney Dividend Calculator",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     title: "Dividend Calculator | ZuneMoney - Calculate Your Dividend Income",
     description:
       "Use ZuneMoney's free Dividend Calculator to estimate your dividend income from stocks. Calculate annual and quarterly dividends with real-time data.",
-    images: ["https://app.zune.money/og-image-dividend-calculator.png"],
+    images: ["https://zune.money/og-image-dividend-calculator.png"],
   },
 }
 

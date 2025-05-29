@@ -12,11 +12,11 @@ export const metadata: Metadata = {
     title: "Stock Comparison Tool | ZuneMoney - Compare Stocks Easily",
     description:
       "Compare stocks like AAPL and MSFT with ZuneMoney's free tool. Analyze price, dividend yield, and more.",
-    url: "https://app.zune.money/stock-comparison-tool",
+    url: "https://zune.money/stock-comparison-tool",
     siteName: "ZuneMoney",
     images: [
       {
-        url: "https://app.zune.money/og-image.png",
+        url: "https://zune.money/og-image.png",
         width: 1200,
         height: 630,
         alt: "ZuneMoney Stock Comparison Tool",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     title: "Stock Comparison Tool | ZuneMoney - Compare Stocks Easily",
     description:
       "Compare stocks like AAPL and MSFT with ZuneMoney's free tool. Analyze price, dividend yield, and more.",
-    images: ["https://app.zune.money/og-image.png"],
+    images: ["https://zune.money/og-image.png"],
     creator: "@zunemoney",
   },
 }

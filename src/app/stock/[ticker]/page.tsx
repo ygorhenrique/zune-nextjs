@@ -49,7 +49,7 @@ async function getStockByTicker(ticker: string) {
 
   const companyFundamentals = await stockClient.getCompanyFundamentals(ticker)
   const companyDividends = await stockClient.getCompanyDividends(ticker)
-  const companyLegacyEntity = await stockClient.getCompany(ticker)
+  const companyPeers = await stockClient.getCompanyPeers(ticker)
   const quote = await stockClient.getCompanyQuote(ticker)
   const sectors = await stockClient.getCompanySectors(ticker)
 
@@ -96,7 +96,7 @@ async function getStockByTicker(ticker: string) {
         fiveYears: generatePriceHistory(120.5, 1825, 0.025),
       },
       dividendHistory: companyDividends,
-      similarCompanies: companyLegacyEntity.peers,
+      similarCompanies: companyPeers,
       stocksBySector: sectors,
     }
   }

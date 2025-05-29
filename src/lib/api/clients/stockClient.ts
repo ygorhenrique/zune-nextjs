@@ -5,11 +5,8 @@ import {
   LastCloseResponse,
   CompanyFundamentals,
   Dividend,
-  CompanyInfo,
   StockDailyResponse,
   StockData,
-  Peer,
-  CompanyLegacyEntity,
   SectorStockResponse,
   QuoteResponse
 } from './types';
@@ -131,18 +128,16 @@ export const stockClient = {
     }
   },
 
-  // Legacy Company Endpoint
-  async getCompany(symbol: string): Promise<CompanyLegacyEntity> {
+    async getCompanyPeers(symbol: string): Promise<SimilarCompany[]> {
     try {
       // Financial Modeling Prep profile endpoint (requires API key in practice)
-      const url = `https://api.zune.money/stock/${symbol}?period=1m`;
-      const response = await apiClient.get<CompanyLegacyEntity>(url);
+      const url = `https://api.zune.money/stock/${symbol}/peers`;
+      const response = await apiClient.get<SimilarCompany[]>(url);
 
       if (!response) {
         throw new Error('Invalid response format or no data available');
       }
-      return {
-        peers: response.peers.map(peer => ({
+      return response.map(peer => ({
           ticker: peer.symbol,
           companyName: peer.companyName,
           exchange: peer.exchange,
@@ -151,8 +146,7 @@ export const stockClient = {
           city: peer.city,
           country: peer.country,
           logoUrl: ''
-        } as SimilarCompany)),
-      };
+        } as SimilarCompany));
     } catch (error) {
       console.error(`Error fetching fundamentals for ${symbol}:`, error);
       throw error;

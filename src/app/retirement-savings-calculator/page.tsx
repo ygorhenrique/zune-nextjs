@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     title: "Retirement Savings Calculator | ZuneMoney - Plan Your Future",
     description:
       "Calculate your retirement savings with ZuneMoney's free tool. Plan how much you need to save for a secure future.",
-    url: "https://app.zune.money/retirement-savings-calculator",
+    url: "https://zune.money/retirement-savings-calculator",
     siteName: "ZuneMoney",
     images: [
       {
-        url: "https://app.zune.money/og-retirement-calculator.png",
+        url: "https://zune.money/og-retirement-calculator.png",
         width: 1200,
         height: 630,
         alt: "ZuneMoney Retirement Savings Calculator",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     title: "Retirement Savings Calculator | ZuneMoney - Plan Your Future",
     description:
       "Calculate your retirement savings with ZuneMoney's free tool. Plan how much you need to save for a secure future.",
-    images: ["https://app.zune.money/og-retirement-calculator.png"],
+    images: ["https://zune.money/og-retirement-calculator.png"],
   },
 }
 

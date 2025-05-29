@@ -37,7 +37,7 @@ export function Navbar() {
                 <Link href="https://blog.zune.money/" className="text-gray-600 hover:text-indigo-600">
                   Blog
                 </Link>
-                <Link href="https://app.zune.money/demo" className="text-gray-600 hover:text-indigo-600">
+                <Link href="https://zune.money/demo" className="text-gray-600 hover:text-indigo-600">
                   Demo
                 </Link>
                 <Button asChild className="bg-indigo-600 hover:bg-indigo-700 transition transform hover:scale-105">
@@ -89,16 +89,16 @@ export function Navbar() {
                 <Link href="https://blog.zune.money/" className="block text-gray-600 hover:text-indigo-600">
                   Blog
                 </Link>
-                <Link href="https://app.zune.money/demo" className="block text-gray-600 hover:text-indigo-600">
+                <Link href="https://zune.money/demo" className="block text-gray-600 hover:text-indigo-600">
                   Demo
                 </Link>
                 <Link
-                  href="https://app.zune.money/signup"
+                  href="https://zune.money/signup"
                   className="block bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700"
                 >
                   Sign Up
                 </Link>
-                <Link href="https://app.zune.money" className="block text-indigo-600 hover:underline">
+                <Link href="https://zune.money/login" className="block text-indigo-600 hover:underline">
                   Log In
                 </Link>
               </>

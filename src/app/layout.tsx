@@ -45,7 +45,7 @@ export default function RootLayout({
     description: 'ZuneMoney is a portfolio and dividend tracking platform for global stocks, offering multi-currency support and performance analytics.',
     potentialAction: {
       '@type': 'SearchAction',
-      target: 'https://app.zune.money/stock/{search_term_string}',
+      target: 'https://zune.money/stock/{search_term_string}',
       'query-input': 'required name=search_term_string',
     },
   };
