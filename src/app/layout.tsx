@@ -5,6 +5,7 @@ import { Footer } from '@/components/Footer';
 import { Toaster } from "@/components/ui/toaster"
 import "./globals.css"
 import type { Metadata } from "next"
+import Script from "next/script"
 
 export const metadata: Metadata = {
   title: "ZuneMoney - Track Your Portfolio & Dividends Effortlessly",
@@ -64,6 +65,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaOrg) }}
         />
+        <Script defer data-domain="zune.money" src="https://plausible.io/js/script.js" strategy="afterInteractive" />
       </head>
       <body className="font-sans antialiased min-h-screen flex flex-col">
         {/* <ThemeProvider attribute="class" defaultTheme="light"> */}
