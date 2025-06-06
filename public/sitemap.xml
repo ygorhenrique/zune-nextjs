@@ -31,28 +31,25 @@
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
-        <url>
+    <url>
         <loc>https://zune.money/dividend-calculator</loc>
         <lastmod>2025-05-29</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
-    </url>
-        <url>
+    <url>
         <loc>https://zune.money/retirement-savings-calculator</loc>
         <lastmod>2025-05-29</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
-    </url>
-        <url>
+    <url>
         <loc>https://zune.money/stock-comparison-tool</loc>
         <lastmod>2025-05-29</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
-    </url>
-        <url>
+    <url>
         <loc>https://zune.money/portfolio-growth-simulator</loc>
         <lastmod>2025-05-29</lastmod>
         <changefreq>monthly</changefreq>
