@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.zune.money/sitemap.xml
+Sitemap: https://api.zune.money/sitemap
