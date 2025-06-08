@@ -88,7 +88,7 @@ export function ChangePasswordSection() {
       toast({
         title: "Success!",
         description: "Password updated successfully!",
-        variant: "success",
+        variant: "default",
       })
 
       // Reset form
