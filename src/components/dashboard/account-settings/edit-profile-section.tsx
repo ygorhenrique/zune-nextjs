@@ -44,7 +44,7 @@ export function EditProfileSection() {
       toast({
         title: "Success!",
         description: "Profile name updated successfully!",
-        variant: "success",
+        variant: "default",
       })
 
       setCurrentName(newName)
