@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import { DashboardShell } from "@/components/dashboard/dashboard-shell"
-import { AccountSettingsContent } from "@/components/dashboard/account-settings/account-settings-content"
+import { AccountSettingsContent } from "@/components/dashboard/settings/settings-content"
 
 export const metadata: Metadata = {
   title: "Account Settings | ZuneMoney - Manage Your Profile",
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     title: "Account Settings | ZuneMoney - Manage Your Profile",
     description:
       "Manage your ZuneMoney account settings. Update your password, profile name, or delete your account securely.",
-    url: "https://app.zune.money/dashboard/account-settings",
+    url: "https://app.zune.money/dashboard/settings",
     siteName: "ZuneMoney",
     images: [
       {
