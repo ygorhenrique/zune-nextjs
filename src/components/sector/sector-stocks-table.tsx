@@ -58,7 +58,7 @@ export function SectorStocksTable({ sectorName, stocks, className }: SectorStock
                       {stock.ticker}
                     </Link>
                   </TableCell>
-                  <TableCell>{stock.companyName}</TableCell>
+                  <TableCell>{stock.name}</TableCell>
                   <TableCell className="text-right">${formatNumber(stock.price)}</TableCell>
                   <TableCell className={`text-right ${(stock.change || 0) >= 0 ? "text-green-600" : "text-red-600"}`}>
                     {(stock.change || 0) >= 0 ? "+" : ""}

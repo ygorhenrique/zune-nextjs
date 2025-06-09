@@ -1,11 +1,11 @@
-import type { Metadata } from "next"
-import { notFound } from "next/navigation"
-import { SectorCTA } from "@/components/sector/sector-cta"
-import { SectorMetrics } from "@/components/sector/sector-metrics"
-import { SectorPerformanceChart } from "@/components/sector/sector-performance-chart"
-import { SectorStocksTable } from "@/components/sector/sector-stocks-table"
-import { SectorTrends } from "@/components/sector/sector-trends"
-import { getSectorData } from "@/lib/mock-sector-data"
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { SectorCTA } from "@/components/sector/sector-cta";
+import { SectorMetrics } from "@/components/sector/sector-metrics";
+import { SectorPerformanceChart } from "@/components/sector/sector-performance-chart";
+import { SectorStocksTable } from "@/components/sector/sector-stocks-table";
+import { SectorTrends } from "@/components/sector/sector-trends";
+import { sectorsClient } from "@/lib/api/clients/sectorsClient";
 
 interface SectorPageProps {
   params: Promise<{
@@ -14,21 +14,31 @@ interface SectorPageProps {
 }
 
 export async function generateMetadata({ params }: SectorPageProps): Promise<Metadata> {
-  const { sector } = await params
-  const sectorData = getSectorData(sector)
+  const { sector } = await params;
+  let sectorData;
+
+  try {
+    sectorData = await sectorsClient.getSectorData(sector);
+  } catch (error) {
+    console.error(`Error fetching metadata for sector ${sector}:`, error);
+    return {
+      title: "Sector Not Found - ZuneMoney",
+      description: "The requested sector could not be found.",
+    };
+  }
 
   if (!sectorData) {
     return {
       title: "Sector Not Found - ZuneMoney",
       description: "The requested sector could not be found.",
-    }
+    };
   }
 
-  const { name, topStocks } = sectorData
+  const { name, topStocks } = sectorData;
   const topTickersList = topStocks
     .slice(0, 3)
     .map((stock) => stock.ticker)
-    .join(", ")
+    .join(", ");
 
   return {
     title: `${name} Stocks to Watch in 2025 - ZuneMoney`,
@@ -38,18 +48,25 @@ export async function generateMetadata({ params }: SectorPageProps): Promise<Met
       `${name.toLowerCase()} stocks 2025`,
       `invest in ${name.toLowerCase()} stocks`,
     ],
-  }
+  };
 }
 
 export default async function SectorPage({ params }: SectorPageProps) {
-  const { sector } = await params
-  const sectorData = getSectorData(sector)
+  const { sector } = await params;
+  let sectorData;
 
-  if (!sectorData) {
-    notFound()
+  try {
+    sectorData = await sectorsClient.getSectorData(sector);
+  } catch (error) {
+    console.error(`Error fetching sector data for ${sector}:`, error);
+    notFound();
   }
 
-  const { name, description, performanceData, topStocks, trends } = sectorData
+  if (!sectorData) {
+    notFound();
+  }
+
+  const { name, description, performanceData, topStocks, trends } = sectorData;
 
   // Debug the performance data
   console.log(
@@ -57,7 +74,7 @@ export default async function SectorPage({ params }: SectorPageProps) {
     performanceData
       ? `${performanceData.length} data points, first: ${JSON.stringify(performanceData[0])}, last: ${JSON.stringify(performanceData[performanceData.length - 1])}`
       : "No data",
-  )
+  );
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -83,5 +100,5 @@ export default async function SectorPage({ params }: SectorPageProps) {
 
       <SectorCTA sectorName={name} />
     </div>
-  )
+  );
 }
