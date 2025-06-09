@@ -27,9 +27,9 @@ export function StockComparisonTool() {
   const [stock1, setStock1] = useState("")
   const [stock2, setStock2] = useState("")
   const [stock3, setStock3] = useState("")
-  const [suggestions1, setSuggestions1] = useState<{ ticker: string; companyName: string }[]>([])
-  const [suggestions2, setSuggestions2] = useState<{ ticker: string; companyName: string }[]>([])
-  const [suggestions3, setSuggestions3] = useState<{ ticker: string; companyName: string }[]>([])
+  const [suggestions1, setSuggestions1] = useState<{ ticker: string; name: string }[]>([])
+  const [suggestions2, setSuggestions2] = useState<{ ticker: string; name: string }[]>([])
+  const [suggestions3, setSuggestions3] = useState<{ ticker: string; name: string }[]>([])
   const [showSuggestions1, setShowSuggestions1] = useState(false)
   const [showSuggestions2, setShowSuggestions2] = useState(false)
   const [showSuggestions3, setShowSuggestions3] = useState(false)
@@ -66,7 +66,7 @@ export function StockComparisonTool() {
   const handleSearch = (
     value: string,
     setterFn: React.Dispatch<React.SetStateAction<string>>,
-    suggestionSetter: React.Dispatch<React.SetStateAction<{ ticker: string; companyName: string }[]>>,
+    suggestionSetter: React.Dispatch<React.SetStateAction<{ ticker: string; name: string }[]>>,
     showSuggestionSetter: React.Dispatch<React.SetStateAction<boolean>>,
   ) => {
     setterFn(value)
@@ -75,7 +75,7 @@ export function StockComparisonTool() {
       const filteredStocks = popularStocks.filter(
         (stock) =>
           stock.ticker.toLowerCase().includes(value.toLowerCase()) ||
-          stock.companyName.toLowerCase().includes(value.toLowerCase()),
+          stock.name.toLowerCase().includes(value.toLowerCase()),
       )
       suggestionSetter(filteredStocks)
       showSuggestionSetter(true)
@@ -86,7 +86,7 @@ export function StockComparisonTool() {
   }
 
   const selectStock = (
-    stock: { ticker: string; companyName: string },
+    stock: { ticker: string; name: string },
     setterFn: React.Dispatch<React.SetStateAction<string>>,
     showSuggestionSetter: React.Dispatch<React.SetStateAction<boolean>>,
   ) => {
@@ -197,7 +197,7 @@ export function StockComparisonTool() {
                       className="cursor-pointer px-4 py-2 hover:bg-gray-100"
                       onClick={() => selectStock(stock, setStock1, setShowSuggestions1)}
                     >
-                      {stock.ticker} - {stock.companyName}
+                      {stock.ticker} - {stock.name}
                     </div>
                   ))}
                 </div>
@@ -224,7 +224,7 @@ export function StockComparisonTool() {
                       className="cursor-pointer px-4 py-2 hover:bg-gray-100"
                       onClick={() => selectStock(stock, setStock2, setShowSuggestions2)}
                     >
-                      {stock.ticker} - {stock.companyName}
+                      {stock.ticker} - {stock.name}
                     </div>
                   ))}
                 </div>
@@ -251,7 +251,7 @@ export function StockComparisonTool() {
                       className="cursor-pointer px-4 py-2 hover:bg-gray-100"
                       onClick={() => selectStock(stock, setStock3, setShowSuggestions3)}
                     >
-                      {stock.ticker} - {stock.companyName}
+                      {stock.ticker} - {stock.name}
                     </div>
                   ))}
                 </div>

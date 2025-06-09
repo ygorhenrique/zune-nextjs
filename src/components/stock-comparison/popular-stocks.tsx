@@ -23,7 +23,7 @@ export function PopularStocks() {
               <tr key={stock.ticker} className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}>
                 <td className="border border-gray-200 p-3">
                   <Link href={`/stock/${stock.ticker}`} className="text-blue-600 hover:underline">
-                    {stock.companyName}
+                    {stock.name}
                   </Link>
                 </td>
                 <td className="border border-gray-200 p-3">{stock.ticker}</td>
