@@ -8,12 +8,12 @@ export interface SectorPerformance {
 export interface SectorStock {
   ticker: string
   name: string
-  price: number
+  price?: number
   change?: number
   changePercent?: number
-  dividendYield: number
-  peRatio: number
-  marketCap: number
+  dividendYield?: number
+  peRatio?: number
+  marketCap?: number
 }
 
 export interface SectorTrend {

@@ -23,9 +23,23 @@ export function SectorStocksTable({ sectorName, stocks, className }: SectorStock
   }
 
   const formatMarketCap = (value: number | undefined): string => {
-    if (value === undefined || value === null) return "N/A"
-    return `$${(value).toFixed(1)}B`
-  }
+    if (value === undefined || value === null || isNaN(value)) return "N/A";
+
+    const absValue = Math.abs(value); // Handle negative values if any
+    const trillion = 1_000_000_000_000; // 10^12
+    const billion = 1_000_000_000;     // 10^9
+    const million = 1_000_000;         // 10^6
+
+    if (absValue >= trillion) {
+      return `$${(value / trillion).toFixed(1)}T`;
+    } else if (absValue >= billion) {
+      return `$${(value / billion).toFixed(1)}B`;
+    } else if (absValue >= million) {
+      return `$${(value / million).toFixed(1)}M`;
+    } else {
+      return `$${value.toFixed(1)}`; // For values below 1 million, show as dollars
+    }
+  };
 
   return (
     <Card className={className}>
@@ -64,7 +78,7 @@ export function SectorStocksTable({ sectorName, stocks, className }: SectorStock
                     {(stock.change || 0) >= 0 ? "+" : ""}
                     {formatNumber(stock.change || 0)} ({formatPercentage(stock.changePercent || 0)})
                   </TableCell>
-                  <TableCell className="text-right">{stock.dividendYield ? formatPercentage(stock.dividendYield * 100 ) : null }</TableCell>
+                  <TableCell className="text-right">{stock.dividendYield ? formatPercentage(stock.dividendYield * 100) : null}</TableCell>
                   <TableCell className="text-right hidden md:table-cell">{formatNumber(stock.peRatio, 1)}</TableCell>
                   <TableCell className="text-right hidden lg:table-cell">{formatMarketCap(stock.marketCap)}</TableCell>
                 </TableRow>
