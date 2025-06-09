@@ -64,7 +64,7 @@ export function SectorStocksTable({ sectorName, stocks, className }: SectorStock
                     {(stock.change || 0) >= 0 ? "+" : ""}
                     {formatNumber(stock.change || 0)} ({formatPercentage(stock.changePercent || 0)})
                   </TableCell>
-                  <TableCell className="text-right">{formatPercentage(stock.dividendYield)}</TableCell>
+                  <TableCell className="text-right">{stock.dividendYield ? formatPercentage(stock.dividendYield * 100 ) : null }</TableCell>
                   <TableCell className="text-right hidden md:table-cell">{formatNumber(stock.peRatio, 1)}</TableCell>
                   <TableCell className="text-right hidden lg:table-cell">{formatMarketCap(stock.marketCap)}</TableCell>
                 </TableRow>
