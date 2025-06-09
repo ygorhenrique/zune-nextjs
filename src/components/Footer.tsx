@@ -88,7 +88,7 @@ export function Footer() {
               {popularStocks.map((stock) => (
                 <li key={stock.ticker}>
                   <Link href={`/stock/${stock.ticker}`} className="text-gray-400 hover:text-white hover:underline">
-                    {stock.companyName} ({stock.ticker})
+                    {stock.name} ({stock.ticker})
                   </Link>
                 </li>
               ))}
